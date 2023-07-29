@@ -58,7 +58,7 @@ public class ScreenArmorCrafter extends ContainerScreen<ContainerArmorCrafter> {
 
         if ((this.container.crafterInventory.getStackInSlot(0).getItem() instanceof ArmorItem)) {
             this.font.drawText(matrixStack, this.container.crafterInventory.getStackInSlot(0).getDisplayName(), edgeSpacingX + 8, edgeSpacingY + 16, 0x000000);
-            this.font.drawText(matrixStack, new StringTextComponent("text.hunterarmorupgrades.materials"), edgeSpacingX + 8, edgeSpacingY + 28, 0x000000);
+            this.font.drawText(matrixStack, new TranslationTextComponent("text.hunterarmorupgrades.materials"), edgeSpacingX + 8, edgeSpacingY + 28, 0x000000);
 
             ItemStack repairItem = ((ArmorItem)this.container.crafterInventory.getStackInSlot(0).getItem()).getArmorMaterial().getRepairMaterial().getMatchingStacks()[0];
 
