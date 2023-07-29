@@ -1,25 +1,18 @@
 package dev.matthe815.hunterarmorupgrades.network;
 
-import com.google.common.collect.Multimap;
 import dev.matthe815.hunterarmorupgrades.containers.ContainerArmorCrafter;
-import dev.matthe815.hunterarmorupgrades.mixin.ItemMixin;
-import net.minecraft.entity.ai.attributes.Attribute;
+import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 public class PacketArmorUpgrade {
@@ -33,12 +26,15 @@ public class PacketArmorUpgrade {
          * Required for the packet to function, but performs no operation.
          */
         public static void handleServer(final PacketArmorUpgrade pkt, Supplier<NetworkEvent.Context> ctx) {
-            ItemStack item = ((ContainerArmorCrafter)ctx.get().getSender().openContainer).crafterInventory.getStackInSlot(0);
+            ContainerArmorCrafter container = ((ContainerArmorCrafter) Objects.requireNonNull(ctx.get().getSender()).openContainer);
+            PlayerEntity player = Objects.requireNonNull(ctx.get().getSender());
+            ItemStack item = container.getSlotItem();
 
             // Only process armors
             if (!(item.getItem() instanceof ArmorItem)) return;
-            if (!checkUpgradeRequirements(ctx.get().getSender(), (ContainerArmorCrafter) ctx.get().getSender().openContainer)) return;
-            takeUpgradeItems(ctx.get().getSender(), (ContainerArmorCrafter) ctx.get().getSender().openContainer);
+            if (!checkUpgradeRequirements(player, container)) return;
+
+            takeUpgradeItems(player, (ContainerArmorCrafter) ctx.get().getSender().openContainer);
 
             CompoundNBT nbt = item.getTag();
 
@@ -59,54 +55,25 @@ public class PacketArmorUpgrade {
         }
 
         private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container) {
-            List<ItemStack> ingredients = mergeIngredients(getUpgradeMaterials(((ContainerArmorCrafter)player.openContainer).crafterInventory.getStackInSlot(0), player.world));
+            List<ItemStack> ingredients = ItemStackUtils.makeMergedList(container.getSlotItem(), player.world);
 
             for (ItemStack ingredient: ingredients) {
                 // Show as able if you have enough items
-                ItemStack item = player.inventory.getStackInSlot(player.inventory.getSlotFor(ingredient));
+                ItemStack item = ItemStackUtils.getHeldItemStack(player, ingredient);
                 item.setCount(item.getCount() - ingredient.getCount());
             }
 
-            return;
-        }
-
-        protected static List<ItemStack> mergeIngredients (NonNullList<Ingredient> ingredients) {
-            List<ItemStack> items = new ArrayList<>();
-
-            for (Ingredient ingredient : ingredients) {
-                if (ingredient.getMatchingStacks().length == 0) continue;
-
-                boolean found = false;
-
-                for (ItemStack item : items) {
-                    if (item.getItem().getRegistryName().equals(ingredient.getMatchingStacks()[0].getItem().getRegistryName())) {
-                        item.setCount(item.getCount() + 1);
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (found) continue;
-
-                items.add(ingredient.getMatchingStacks()[0].copy());
-            }
-
-            return items;
-        }
-
-        protected static NonNullList<Ingredient> getUpgradeMaterials (ItemStack item, World world) {
-            NonNullList<Ingredient> items = world.getRecipeManager().getRecipe(item.getItem().getRegistryName()).get().getIngredients();
-            return items;
         }
 
         private static boolean checkUpgradeRequirements(PlayerEntity player, ContainerArmorCrafter container) {
-            List<ItemStack> ingredients = mergeIngredients(getUpgradeMaterials(((ContainerArmorCrafter)player.openContainer).crafterInventory.getStackInSlot(0), player.world));
+            List<ItemStack> ingredients = ItemStackUtils.makeMergedList(container.getSlotItem(), player.world);
 
             boolean valid = true;
 
             for (ItemStack ingredient: ingredients) {
                 // Show as able if you have enough items
-                if (valid == true) valid = player.inventory.hasItemStack(ingredient) && player.inventory.getStackInSlot(player.inventory.getSlotFor(ingredient)).getCount() >= ingredient.getCount();
+                valid = container.hasIngredient(ingredient);
+                if (!valid) break;
             }
 
             return valid;

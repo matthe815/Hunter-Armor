@@ -26,6 +26,22 @@ public class ContainerArmorCrafter extends Container {
         addPlayerInventory(9, 84);
     }
 
+    // Check if the item in the slot is an upgradeable item.
+    public boolean hasUpgradableItem()
+    {
+        return (getSlotItem().getItem() instanceof ArmorItem);
+    }
+
+    public ItemStack getSlotItem()
+    {
+        return this.crafterInventory.getStackInSlot(0);
+    }
+
+    public boolean hasIngredient(ItemStack ingredient)
+    {
+        return this.inventory.hasItemStack(ingredient) && this.inventory.getStackInSlot(this.inventory.getSlotFor(ingredient)).getCount() >= ingredient.getCount();
+    }
+
     protected void addPlayerInventory(int xInventory, int yInventory) {
         int id = 9;
 
