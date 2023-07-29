@@ -9,11 +9,16 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -54,17 +59,57 @@ public class PacketArmorUpgrade {
         }
 
         private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container) {
-            ItemStack repairItem = ((ArmorItem)container.crafterInventory.getStackInSlot(0).getItem()).getArmorMaterial().getRepairMaterial().getMatchingStacks()[0];
-            if (!player.inventory.hasItemStack(repairItem)) return;
-            int repairSlot = player.inventory.getSlotFor(repairItem);
-            player.inventory.getStackInSlot(repairSlot).setCount(player.inventory.getStackInSlot(repairSlot).getCount() - 1);
+            List<ItemStack> ingredients = mergeIngredients(getUpgradeMaterials(((ContainerArmorCrafter)player.openContainer).crafterInventory.getStackInSlot(0), player.world));
+
+            for (ItemStack ingredient: ingredients) {
+                // Show as able if you have enough items
+                ItemStack item = player.inventory.getStackInSlot(player.inventory.getSlotFor(ingredient));
+                item.setCount(item.getCount() - ingredient.getCount());
+            }
 
             return;
         }
 
+        protected static List<ItemStack> mergeIngredients (NonNullList<Ingredient> ingredients) {
+            List<ItemStack> items = new ArrayList<>();
+
+            for (Ingredient ingredient : ingredients) {
+                if (ingredient.getMatchingStacks().length == 0) continue;
+
+                boolean found = false;
+
+                for (ItemStack item : items) {
+                    if (item.getItem().getRegistryName().equals(ingredient.getMatchingStacks()[0].getItem().getRegistryName())) {
+                        item.setCount(item.getCount() + 1);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found) continue;
+
+                items.add(ingredient.getMatchingStacks()[0].copy());
+            }
+
+            return items;
+        }
+
+        protected static NonNullList<Ingredient> getUpgradeMaterials (ItemStack item, World world) {
+            NonNullList<Ingredient> items = world.getRecipeManager().getRecipe(item.getItem().getRegistryName()).get().getIngredients();
+            return items;
+        }
+
         private static boolean checkUpgradeRequirements(PlayerEntity player, ContainerArmorCrafter container) {
-            ItemStack repairItem = ((ArmorItem)container.crafterInventory.getStackInSlot(0).getItem()).getArmorMaterial().getRepairMaterial().getMatchingStacks()[0];
-            return player.inventory.hasItemStack(repairItem);
+            List<ItemStack> ingredients = mergeIngredients(getUpgradeMaterials(((ContainerArmorCrafter)player.openContainer).crafterInventory.getStackInSlot(0), player.world));
+
+            boolean valid = true;
+
+            for (ItemStack ingredient: ingredients) {
+                // Show as able if you have enough items
+                if (valid == true) valid = player.inventory.hasItemStack(ingredient) && player.inventory.getStackInSlot(player.inventory.getSlotFor(ingredient)).getCount() >= ingredient.getCount();
+            }
+
+            return valid;
         }
     }
 }
