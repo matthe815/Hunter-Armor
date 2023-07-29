@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "iii",
+    " a ",
+    "gdg"
+  ],
+  "key":
+  {
+    "i":
+    {
+      "item": "minecraft:iron_block"
+    },
+    "a":
+    {
+      "item": "minecraft:anvil"
+    },
+    "g":
+    {
+      "item": "minecraft:gold_block"
+    },
+    "d":
+    {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result":
+  {
+    "item": "hunterarmorupgrades:armor_crafter",
+    "count": 1
+  }
+}
