@@ -5,6 +5,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.*;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.text.ITextComponent;
@@ -19,7 +20,6 @@ public class ContainerArmorCrafter extends Container {
         super(Registration.ARMOR_CRAFTER.get(), windowId);
 
         this.inventory = playerInventory;
-        this.crafterInventory.addItem(new ItemStack(Items.ANDESITE));
 
         this.addSlot(new Slot(this.crafterInventory, 0, 80, 35));
 
@@ -46,6 +46,15 @@ public class ContainerArmorCrafter extends Container {
 
             id++;
         }
+    }
+
+    @Override
+    public void onContainerClosed(PlayerEntity playerIn) {
+        // Return the item to you if the inventory is closed
+        if (!(this.crafterInventory.getStackInSlot(0).getItem() instanceof ArmorItem)) return;
+        playerIn.inventory.addItemStackToInventory(this.crafterInventory.getStackInSlot(0));
+
+        super.onContainerClosed(playerIn);
     }
 
     @Override

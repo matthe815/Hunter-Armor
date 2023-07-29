@@ -1,3 +1,6 @@
 {
-  "hunterarmorupgrades.title.armorcrafter": "Armor Crafting"
+  "title.hunterarmorupgrades.armorcrafter": "Armor Crafting",
+  "block.hunterarmorupgrades.armor_crafter": "Armor Crafter",
+  "button.hunterarmorupgrades.upgrade": "Upgrade",
+  "text.hunterarmorupgrades.materials": "Materials:"
 }

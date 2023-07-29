@@ -21,6 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
@@ -28,6 +29,7 @@ public class BlockArmorCrafter extends Block {
     public BlockArmorCrafter() {
         super(Properties.create(Material.IRON));
         this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_crafter"));
+
     }
 
     public static class ItemBlockArmorCrafter extends BlockItem {
@@ -50,7 +52,7 @@ public class BlockArmorCrafter extends Block {
 
         @Override
         public ITextComponent getDisplayName() {
-            return new StringTextComponent("Test");
+            return new TranslationTextComponent("title.hunterarmorupgrades.armorcrafter");
         }
 
         /**
