@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "l  ",
+    "l  ",
+    "   "
+  ],
+  "key":
+  {
+    "i":
+    {
+      "item": "minecraft:leather"
+    }
+  },
+  "result":
+  {
+    "item": "hunterarmorupgrades:leather_straps",
+    "count": 1
+  }
+}

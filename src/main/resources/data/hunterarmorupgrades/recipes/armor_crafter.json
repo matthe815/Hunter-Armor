@@ -10,7 +10,7 @@
   {
     "i":
     {
-      "item": "minecraft:iron_block"
+      "item": "minecraft:iron_ingot"
     },
     "a":
     {
@@ -18,7 +18,7 @@
     },
     "g":
     {
-      "item": "minecraft:gold_block"
+      "item": "minecraft:gold_ingot"
     },
     "d":
     {
