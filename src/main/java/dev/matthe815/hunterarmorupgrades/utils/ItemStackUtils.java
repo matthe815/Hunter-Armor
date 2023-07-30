@@ -37,11 +37,11 @@ public class ItemStackUtils {
         return new UpgradeRoute(new Upgrade[] {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 2), new ItemStack(Registration.LEATHER_STRAP, 2) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3), new ItemStack(Registration.LEATHER_STRAP, 1), new ItemStack(Items.BONE, 3) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1), new ItemStack(Registration.PROCESSED_HIDE, 2) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD, 1), new ItemStack(Registration.PROCESSED_HIDE) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 6) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 7) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 4), new ItemStack(Registration.LEATHER_STRAP, 1), new ItemStack(Items.BONE, 3) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1), new ItemStack(Registration.PROCESSED_HIDE, 4) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 2), new ItemStack(Items.EMERALD, 1), new ItemStack(Registration.PROCESSED_HIDE) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1), new ItemStack(Registration.LEATHER_STRAP, 2), new ItemStack(Items.IRON_INGOT, 2)}, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 5), new ItemStack(Registration.PROCESSED_HIDE, 4), new ItemStack(Items.GUNPOWDER, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Registration.PROCESSED_HIDE, 4), new ItemStack(Registration.ARMOR_SPHERE, 1) }, finalResult)
         }
         );
