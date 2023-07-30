@@ -66,11 +66,6 @@ public class PacketArmorUpgrade {
 
             CompoundNBT newNbt = new CompoundNBT();
             newNbt.putInt("upgrade_level", currentLevel);
-
-            item.getEnchantmentTagList().forEach(inbt -> {
-                newItem.getEnchantmentTagList().add(inbt);
-            });
-
             newItem.setTag(newNbt);
 
             newItem.addAttributeModifier(Attributes.ARMOR,

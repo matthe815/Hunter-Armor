@@ -1,6 +1,7 @@
 package dev.matthe815.hunterarmorupgrades;
 
 import dev.matthe815.hunterarmorupgrades.blocks.BlockArmorCrafter;
+import dev.matthe815.hunterarmorupgrades.events.ArmorEvents;
 import dev.matthe815.hunterarmorupgrades.gui.screens.ScreenArmorCrafter;
 import dev.matthe815.hunterarmorupgrades.loot.SimpleChestModifier;
 import dev.matthe815.hunterarmorupgrades.network.PacketArmorUpgrade;
@@ -38,8 +39,10 @@ public class HunterArmorUpgrades {
         // Register the doClientStuff method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ArmorEvents());
 
         Registration.init();
         ItemStackUtils.init();
@@ -68,7 +71,7 @@ public class HunterArmorUpgrades {
         @Override
         protected void start()
         {
-            add("dungeon_loot", Registration.DUNGEON_MOD.get(), new SimpleChestModifier(
+            add("dungeon_mod", Registration.DUNGEON_MOD.get(), new SimpleChestModifier(
                     new ILootCondition[] { LootTableIdCondition.builder(new ResourceLocation("chests/simple_dungeon")).build() })
             );
         }
