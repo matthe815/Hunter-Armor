@@ -37,7 +37,7 @@ public class ItemStackUtils {
         return new UpgradeRoute(new Upgrade[] {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 2), new ItemStack(Registration.LEATHER_STRAP, 2) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3), new ItemStack(Registration.LEATHER_STRAP, 1), new ItemStack(Items.BONE) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3), new ItemStack(Registration.LEATHER_STRAP, 1), new ItemStack(Items.BONE, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1), new ItemStack(Registration.PROCESSED_HIDE, 2) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD, 1), new ItemStack(Registration.PROCESSED_HIDE) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 6) }, null),
