@@ -3,7 +3,7 @@
   "pattern":
   [
     "ii ",
-    "   ",
+    " ii",
     "   "
   ],
   "key":
@@ -16,6 +16,6 @@
   "result":
   {
     "item": "hunterarmorupgrades:iron_plate",
-    "count": 1
+    "count": 2
   }
 }
