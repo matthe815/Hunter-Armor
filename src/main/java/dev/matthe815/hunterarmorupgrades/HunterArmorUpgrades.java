@@ -3,6 +3,7 @@ package dev.matthe815.hunterarmorupgrades;
 import dev.matthe815.hunterarmorupgrades.blocks.BlockArmorCrafter;
 import dev.matthe815.hunterarmorupgrades.gui.screens.ScreenArmorCrafter;
 import dev.matthe815.hunterarmorupgrades.network.PacketArmorUpgrade;
+import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.Item;
@@ -36,6 +37,7 @@ public class HunterArmorUpgrades {
         MinecraftForge.EVENT_BUS.register(this);
 
         Registration.init();
+        ItemStackUtils.init();
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -53,6 +55,16 @@ public class HunterArmorUpgrades {
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onItemRegistry(final RegistryEvent.Register<Item> blockRegistryEvent) {
+            blockRegistryEvent.getRegistry().register(Registration.IRON_PLATE);
+            blockRegistryEvent.getRegistry().register(Registration.IRON_RIVETS);
+            blockRegistryEvent.getRegistry().register(Registration.LEATHER_STRAP);
+            blockRegistryEvent.getRegistry().register(Registration.PROCESSED_HIDE);
+            blockRegistryEvent.getRegistry().register(Registration.ARMOR_SPHERE);
+            blockRegistryEvent.getRegistry().register(Registration.ARMOR_SPHERE2);
+        }
+
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             blockRegistryEvent.getRegistry().register(ARMOR_CRAFTER);

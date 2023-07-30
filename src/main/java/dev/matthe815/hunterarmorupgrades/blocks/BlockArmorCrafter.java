@@ -22,7 +22,7 @@ import net.minecraftforge.fml.network.NetworkHooks;
 
 public class BlockArmorCrafter extends Block {
     public BlockArmorCrafter() {
-        super(Properties.create(Material.IRON));
+        super(Properties.create(Material.IRON).notSolid().variableOpacity());
         this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_crafter"));
 
     }

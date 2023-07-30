@@ -1,6 +1,7 @@
 package dev.matthe815.hunterarmorupgrades.network;
 
 import dev.matthe815.hunterarmorupgrades.containers.ContainerArmorCrafter;
+import dev.matthe815.hunterarmorupgrades.upgrades.Upgrade;
 import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -16,9 +17,19 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class PacketArmorUpgrade {
-    public PacketArmorUpgrade() {}
-    public static PacketArmorUpgrade decode(PacketBuffer buf) { return new PacketArmorUpgrade(); }
-    public static void encode(PacketArmorUpgrade msg, PacketBuffer buf) {}
+    public int upgradeIndex = 0;
+
+    public PacketArmorUpgrade(int upgradeIndex) {
+        this.upgradeIndex = upgradeIndex;
+    }
+
+    public static PacketArmorUpgrade decode(PacketBuffer buf) {
+        return new PacketArmorUpgrade(buf.readInt());
+    }
+
+    public static void encode(PacketArmorUpgrade msg, PacketBuffer buf) {
+        buf.writeInt(msg.upgradeIndex);
+    }
 
     public static class Handler
     {
@@ -32,14 +43,24 @@ public class PacketArmorUpgrade {
 
             // Only process armors
             if (!(item.getItem() instanceof ArmorItem)) return;
-            if (!checkUpgradeRequirements(player, container)) return;
-
-            takeUpgradeItems(player, (ContainerArmorCrafter) ctx.get().getSender().openContainer);
 
             CompoundNBT nbt = item.getTag();
 
             if (nbt == null) nbt = new CompoundNBT();
-            int currentLevel = nbt.getInt("upgrade_level") + 1;
+            int currentLevel = nbt.getInt("upgrade_level");
+
+            if (!checkUpgradeRequirements(player, container, currentLevel)) return;
+            takeUpgradeItems(player, (ContainerArmorCrafter) ctx.get().getSender().openContainer, currentLevel);
+
+            Upgrade route = ItemStackUtils.getUpgradeForLevel(item.getItem(), currentLevel);
+
+            // Handle evolving the armor.
+            if (route.results != null) {
+                container.crafterInventory.setInventorySlotContents(0, route.results[pkt.upgradeIndex]);
+                return;
+            }
+
+            currentLevel++;
 
             nbt.putInt("upgrade_level", currentLevel);
 
@@ -54,8 +75,8 @@ public class PacketArmorUpgrade {
             item.setTag(nbt);
         }
 
-        private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container) {
-            List<ItemStack> ingredients = ItemStackUtils.makeMergedList(container.getSlotItem(), player.world);
+        private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container, int level) {
+            List<ItemStack> ingredients = ItemStackUtils.getIngredientList(container.getSlotItem(), player.world, level);
 
             for (ItemStack ingredient: ingredients) {
                 // Show as able if you have enough items
@@ -65,8 +86,8 @@ public class PacketArmorUpgrade {
 
         }
 
-        private static boolean checkUpgradeRequirements(PlayerEntity player, ContainerArmorCrafter container) {
-            List<ItemStack> ingredients = ItemStackUtils.makeMergedList(container.getSlotItem(), player.world);
+        private static boolean checkUpgradeRequirements(PlayerEntity player, ContainerArmorCrafter container, int level) {
+            List<ItemStack> ingredients = ItemStackUtils.getIngredientList(container.getSlotItem(), player.world, level);
 
             boolean valid = true;
 

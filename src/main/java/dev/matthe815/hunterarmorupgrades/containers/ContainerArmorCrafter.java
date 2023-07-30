@@ -21,7 +21,7 @@ public class ContainerArmorCrafter extends Container {
 
         this.inventory = playerInventory;
 
-        this.addSlot(new Slot(this.crafterInventory, 0, 80, 35));
+        this.addSlot(new Slot(this.crafterInventory, 0, 153, 8));
 
         addPlayerInventory(9, 84);
     }

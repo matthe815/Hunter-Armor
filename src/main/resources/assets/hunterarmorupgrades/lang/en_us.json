@@ -2,5 +2,13 @@
   "title.hunterarmorupgrades.armorcrafter": "Armor Crafting",
   "block.hunterarmorupgrades.armor_crafter": "Armor Crafter",
   "button.hunterarmorupgrades.upgrade": "Upgrade",
-  "text.hunterarmorupgrades.materials": "Materials:"
+  "text.hunterarmorupgrades.materials": "Materials:",
+
+  "item.hunterarmorupgrades.iron_plate": "Iron Plate",
+  "item.hunterarmorupgrades.iron_rivets": "Iron Rivets",
+  "item.hunterarmorupgrades.leather_straps": "Leather Straps",
+  "item.hunterarmorupgrades.processed_hide": "Processed Hide",
+
+  "item.hunterarmorupgrades.armor_sphere": "Armor Sphere",
+  "item.hunterarmorupgrades.armor_sphere2": "Armor Sphere+"
 }
