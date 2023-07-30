@@ -24,25 +24,25 @@ public class ItemStackUtils {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 1) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 2) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 2), new ItemStack(Registration.IRON_PLATE, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Items.NETHER_STAR, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 5), new ItemStack(Registration.IRON_RIVETS, 3) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 4), new ItemStack(Items.NETHER_STAR, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 7), new ItemStack(Registration.IRON_RIVETS, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 6) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 7) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 8) }, finalResult)
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 6), new ItemStack(Registration.IRON_RIVETS, 4), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
             }
         );
     }
 
     private static UpgradeRoute getLeatherIngredientList (ItemStack[] finalResult) {
         return new UpgradeRoute(new Upgrade[] {
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 2) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 4) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 5) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 2), new ItemStack(Registration.LEATHER_STRAP, 2) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 3), new ItemStack(Registration.LEATHER_STRAP, 1), new ItemStack(Items.BONE) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 1), new ItemStack(Registration.PROCESSED_HIDE, 2) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND), new ItemStack(Items.EMERALD, 1), new ItemStack(Registration.PROCESSED_HIDE) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 6) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 7) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.LEATHER, 8) }, finalResult)
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.PROCESSED_HIDE, 4), new ItemStack(Registration.ARMOR_SPHERE, 1) }, finalResult)
         }
         );
     }

@@ -64,6 +64,7 @@ public class ScreenArmorCrafter extends ContainerScreen<ContainerArmorCrafter> {
     @Override
     public void render(@Nonnull MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         super.render(matrixStack, mouseX, mouseY, partialTicks);
+        this.renderHoveredTooltip(matrixStack, mouseX, mouseY);
 
         String upgradeTranslation = new TranslationTextComponent("button.hunterarmorupgrades.upgrade").getString();
         String upgradeText = this.container.getSlotItem().getTag() != null ? String.format("%s %s/%s", upgradeTranslation, this.container.getSlotItem().getTag().getInt("upgrade_level"), 7) : null;

@@ -2,24 +2,29 @@ package dev.matthe815.hunterarmorupgrades;
 
 import dev.matthe815.hunterarmorupgrades.blocks.BlockArmorCrafter;
 import dev.matthe815.hunterarmorupgrades.gui.screens.ScreenArmorCrafter;
+import dev.matthe815.hunterarmorupgrades.loot.SimpleChestModifier;
 import dev.matthe815.hunterarmorupgrades.network.PacketArmorUpgrade;
 import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.item.Item;
+import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.data.GlobalLootModifierProvider;
+import net.minecraftforge.common.loot.LootTableIdCondition;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod("hunterarmorupgrades")
 public class HunterArmorUpgrades {
     public static final String MOD_ID = "hunterarmorupgrades";
@@ -53,8 +58,31 @@ public class HunterArmorUpgrades {
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {}
 
+    private static class DataProvider extends GlobalLootModifierProvider
+    {
+        public DataProvider(DataGenerator gen, String modid)
+        {
+            super(gen, modid);
+        }
+
+        @Override
+        protected void start()
+        {
+            add("dungeon_loot", Registration.DUNGEON_MOD.get(), new SimpleChestModifier(
+                    new ILootCondition[] { LootTableIdCondition.builder(new ResourceLocation("chests/simple_dungeon")).build() })
+            );
+        }
+    }
+
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
+
+        @SubscribeEvent
+        public static void runData(GatherDataEvent event)
+        {
+            event.getGenerator().addProvider(new DataProvider(event.getGenerator(), MOD_ID));
+        }
+
         @SubscribeEvent
         public static void onItemRegistry(final RegistryEvent.Register<Item> blockRegistryEvent) {
             blockRegistryEvent.getRegistry().register(Registration.IRON_PLATE);
