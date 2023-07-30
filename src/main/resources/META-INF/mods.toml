@@ -11,7 +11,7 @@ loaderVersion = "[36,)" #mandatory This is typically bumped every Minecraft vers
 # Review your options at https://choosealicense.com/. All rights reserved is the default copyright stance, and is thus the default here.
 license = "All Rights Reserved"
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="http://my.issue.tracker/" #optional
+issueTrackerURL="https://github.com/matthe815/Hunter-Armor/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
 # The modid of the mod
@@ -21,20 +21,21 @@ modId = "hunterarmorupgrades" #mandatory
 # see the associated build.gradle script for how to populate this completely automatically during a build
 version = "${file.jarVersion}" #mandatory
 # A display name for the mod
-displayName = "hunterarmorupgrades" #mandatory
+displayName = "Hunter Armor Upgrades" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-#displayURL="http://example.com/" #optional
+displayURL="http://example.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
-#logoFile="HunterArmorUpgrades.png" #optional
+logoFile="icon.png" #optional
 # A text field displayed in the mod UI
-#credits="Thanks for this example mod goes to Java" #optional
+#credits="Matthe815" #optional
 # A text field displayed in the mod UI
-#authors="Love, Cheese and small house plants" #optional
+authors="Matthe815" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
-
+Turns Minecraft's armor system into a multi-tier upgradeable armor system. Upgrade armor through 7 levels
+so to progress to the next tier of armor. Leather -> Iron -> Diamond with each getting exponentially stronger than the last.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.hunterarmorupgrades]] #optional
