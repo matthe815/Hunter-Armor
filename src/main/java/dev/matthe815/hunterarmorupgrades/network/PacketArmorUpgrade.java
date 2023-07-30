@@ -6,6 +6,7 @@ import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -40,6 +41,7 @@ public class PacketArmorUpgrade {
             ContainerArmorCrafter container = ((ContainerArmorCrafter) Objects.requireNonNull(ctx.get().getSender()).openContainer);
             PlayerEntity player = Objects.requireNonNull(ctx.get().getSender());
             ItemStack item = container.getSlotItem();
+            ItemStack newItem = new ItemStack(container.getSlotItem().getItem());
 
             // Only process armors
             if (!(item.getItem() instanceof ArmorItem)) return;
@@ -62,17 +64,19 @@ public class PacketArmorUpgrade {
 
             currentLevel++;
 
-            nbt.putInt("upgrade_level", currentLevel);
+            CompoundNBT newNbt = new CompoundNBT();
+            newNbt.putInt("upgrade_level", currentLevel);
 
-            if (currentLevel == 1) {
-                item.addAttributeModifier(Attributes.ARMOR,
-                        new AttributeModifier("Armor modifier", ((ArmorItem) item.getItem()).getDamageReduceAmount(), AttributeModifier.Operation.ADDITION), ((ArmorItem) item.getItem()).getEquipmentSlot());
-            }
+            item.getEnchantmentTagList().forEach(inbt -> {
+                newItem.getEnchantmentTagList().add(inbt);
+            });
 
-            item.addAttributeModifier(Attributes.ARMOR,
-                    new AttributeModifier("Armor upgrade", ((ArmorItem) item.getItem()).getDamageReduceAmount() / 2, AttributeModifier.Operation.ADDITION), ((ArmorItem)item.getItem()).getEquipmentSlot());
+            newItem.setTag(newNbt);
 
-            item.setTag(nbt);
+            newItem.addAttributeModifier(Attributes.ARMOR,
+                    new AttributeModifier("Armor modifier", ((ArmorItem) item.getItem()).getDamageReduceAmount() + (((ArmorItem) item.getItem()).getDamageReduceAmount() / 2) * currentLevel, AttributeModifier.Operation.ADDITION), ((ArmorItem)item.getItem()).getEquipmentSlot());
+
+            container.crafterInventory.setInventorySlotContents(0, newItem);
         }
 
         private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container, int level) {
