@@ -69,7 +69,7 @@ public class PacketArmorUpgrade {
             newItem.setTag(newNbt);
 
             newItem.addAttributeModifier(Attributes.ARMOR,
-                    new AttributeModifier("Armor modifier", ((ArmorItem) item.getItem()).getDamageReduceAmount() + (((ArmorItem) item.getItem()).getDamageReduceAmount() / 2) * currentLevel, AttributeModifier.Operation.ADDITION), ((ArmorItem)item.getItem()).getEquipmentSlot());
+                    new AttributeModifier("Armor modifier", ((ArmorItem) item.getItem()).getDamageReduceAmount() + (Math.ceil((((double)((ArmorItem) item.getItem()).getDamageReduceAmount()) / 2)) * currentLevel), AttributeModifier.Operation.ADDITION), ((ArmorItem)item.getItem()).getEquipmentSlot());
 
             container.crafterInventory.setInventorySlotContents(0, newItem);
         }

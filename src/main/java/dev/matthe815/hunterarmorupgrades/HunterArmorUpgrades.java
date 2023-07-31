@@ -94,6 +94,10 @@ public class HunterArmorUpgrades {
             blockRegistryEvent.getRegistry().register(Registration.PROCESSED_HIDE);
             blockRegistryEvent.getRegistry().register(Registration.ARMOR_SPHERE);
             blockRegistryEvent.getRegistry().register(Registration.ARMOR_SPHERE2);
+            blockRegistryEvent.getRegistry().register(Registration.DIAMOND_PLATE);
+            blockRegistryEvent.getRegistry().register(Registration.DIAMOND_RIVETS);
+            blockRegistryEvent.getRegistry().register(Registration.DIAMOND_SHARD);
+            blockRegistryEvent.getRegistry().register(Registration.ROTTEN_HEART);
         }
 
         @SubscribeEvent
