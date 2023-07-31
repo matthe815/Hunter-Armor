@@ -85,12 +85,7 @@ public class ItemStackUtils {
         return ingredientList.get(item).ingredientsForUpgrade[level];
     }
 
-    public static ItemStack getHeldItemStack (PlayerEntity player, ItemStack itemStack)
-    {
-        return player.inventory.getStackInSlot(player.inventory.getSlotFor(itemStack));
-    }
-
-    public static ItemStack getHeldItemStackServer (ServerPlayerEntity player, ItemStack stack)
+    public static ItemStack getHeldItemStack (ServerPlayerEntity player, ItemStack stack)
     {
         ItemStack heldStack = null;
         for (ItemStack stackd : player.inventory.mainInventory) {

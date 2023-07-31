@@ -7,7 +7,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -19,7 +18,7 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public class PacketArmorUpgrade {
-    public int upgradeIndex = 0;
+    public int upgradeIndex;
 
     public PacketArmorUpgrade(int upgradeIndex) {
         this.upgradeIndex = upgradeIndex;
@@ -80,7 +79,7 @@ public class PacketArmorUpgrade {
 
             for (ItemStack ingredient: ingredients) {
                 // Show as able if you have enough items
-                ItemStack item = ItemStackUtils.getHeldItemStackServer(player, ingredient);
+                ItemStack item = ItemStackUtils.getHeldItemStack(player, ingredient);
                 item.setCount(item.getCount() - ingredient.getCount());
             }
 
