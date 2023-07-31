@@ -19,6 +19,20 @@ import java.util.Map;
 public class ItemStackUtils {
     public static Map<Item, UpgradeRoute> ingredientList = new HashMap<>();
 
+    private static UpgradeRoute getDiamondIngredientList (ItemStack[] finalResult) {
+        return new UpgradeRoute(new Upgrade[] {
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 2) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 2), new ItemStack(Registration.DIAMOND_PLATE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.NETHER_STAR, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 5), new ItemStack(Registration.DIAMOND_RIVETS, 3) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 3), new ItemStack(Registration.DIAMOND_RIVETS, 3), new ItemStack(Items.FEATHER, 4) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 2), new ItemStack(Items.EMERALD, 1)  }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 6), new ItemStack(Registration.DIAMOND_RIVETS, 4), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
+        }
+        );
+    }
+
     private static UpgradeRoute getIronIngredientList (ItemStack[] finalResult) {
         return new UpgradeRoute(new Upgrade[] {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 1) }, null),
@@ -49,6 +63,11 @@ public class ItemStackUtils {
 
     public static void init()
     {
+        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
+
         ingredientList.put(Items.IRON_HELMET, getIronIngredientList(new ItemStack[] { new ItemStack(Items.DIAMOND_HELMET), new ItemStack(Items.GOLDEN_HELMET) }));
         ingredientList.put(Items.IRON_CHESTPLATE, getIronIngredientList(new ItemStack[] { new ItemStack(Items.DIAMOND_CHESTPLATE), new ItemStack(Items.GOLDEN_CHESTPLATE) }));
         ingredientList.put(Items.IRON_LEGGINGS, getIronIngredientList(new ItemStack[] { new ItemStack(Items.DIAMOND_LEGGINGS), new ItemStack(Items.GOLDEN_LEGGINGS) }));
