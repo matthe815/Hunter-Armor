@@ -1,6 +1,7 @@
 package dev.matthe815.hunterarmorupgrades;
 
 import dev.matthe815.hunterarmorupgrades.blocks.BlockArmorCrafter;
+import dev.matthe815.hunterarmorupgrades.blocks.BlockArmorSphere;
 import dev.matthe815.hunterarmorupgrades.events.ArmorEvents;
 import dev.matthe815.hunterarmorupgrades.gui.screens.ScreenArmorCrafter;
 import dev.matthe815.hunterarmorupgrades.loot.SimpleChestModifier;
@@ -31,6 +32,7 @@ public class HunterArmorUpgrades {
     public static final String MOD_ID = "hunterarmorupgrades";
     private static final String PROTOCOL_VERSION = "1";
     public static final Block ARMOR_CRAFTER = new BlockArmorCrafter();
+    public static final Block ARMOR_SPHERE_ORE = new BlockArmorSphere();
     public static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(new ResourceLocation(MOD_ID, "events"), () -> PROTOCOL_VERSION, s -> true, s -> true);
 
     public HunterArmorUpgrades() {
@@ -42,7 +44,6 @@ public class HunterArmorUpgrades {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new ArmorEvents());
 
         Registration.init();
         ItemStackUtils.init();
@@ -50,6 +51,7 @@ public class HunterArmorUpgrades {
 
     private void setup(final FMLCommonSetupEvent event) {
         CHANNEL.registerMessage(0, PacketArmorUpgrade.class, PacketArmorUpgrade::encode, PacketArmorUpgrade::decode, PacketArmorUpgrade.Handler::handleServer);
+        MinecraftForge.EVENT_BUS.register(new ArmorEvents());
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -103,11 +105,13 @@ public class HunterArmorUpgrades {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             blockRegistryEvent.getRegistry().register(ARMOR_CRAFTER);
+            blockRegistryEvent.getRegistry().register(ARMOR_SPHERE_ORE);
         }
 
         @SubscribeEvent
         public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegisteryEvent) {
             itemRegisteryEvent.getRegistry().register(new BlockArmorCrafter.ItemBlockArmorCrafter(ARMOR_CRAFTER));
+            itemRegisteryEvent.getRegistry().register(new BlockArmorSphere.ItemBlockArmorCrafter(ARMOR_SPHERE_ORE));
         }
     }
 }
