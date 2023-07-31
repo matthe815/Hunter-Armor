@@ -1,7 +1,6 @@
 package dev.matthe815.hunterarmorupgrades.blocks;
 
 import dev.matthe815.hunterarmorupgrades.HunterArmorUpgrades;
-import dev.matthe815.hunterarmorupgrades.Registration;
 import dev.matthe815.hunterarmorupgrades.containers.ContainerArmorCrafter;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -21,17 +20,17 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class BlockArmorCrafter extends Block {
-    public BlockArmorCrafter() {
-        super(Properties.create(Material.ANVIL).notSolid().variableOpacity());
-        this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_crafter"));
+public class BlockArmorSphere extends Block {
+    public BlockArmorSphere() {
+        super(Properties.create(Material.IRON));
+        this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_sphere_ore"));
 
     }
 
     public static class ItemBlockArmorCrafter extends BlockItem {
         public ItemBlockArmorCrafter(Block blockIn) {
-            super(blockIn, new Properties().group(Registration.HUNTER_ARMOR));
-            this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_crafter"));
+            super(blockIn, new Properties());
+            this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_sphere_ore"));
         }
     }
 

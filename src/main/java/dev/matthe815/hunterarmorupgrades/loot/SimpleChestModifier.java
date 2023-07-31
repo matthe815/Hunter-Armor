@@ -30,10 +30,10 @@ public class SimpleChestModifier extends LootModifier {
 
         // Give about a 25% chance to generate an armor sphere and a 5% chance for a +.
         if (random > 2 && random < 7) {
-            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE, new Random().nextInt(3)));
+            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE, new Random().nextInt(6)));
         }
         if (random < 3) {
-            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE2));
+            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE2, new Random().nextInt(3)));
         }
 
         return generatedLoot;

@@ -65,9 +65,9 @@ public class ItemStackUtils {
     public static void init()
     {
         ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
-        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
-        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
-        ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_CHESTPLATE, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_LEGGINGS, getDiamondIngredientList(null));
+        ingredientList.put(Items.DIAMOND_BOOTS, getDiamondIngredientList(null));
 
         ingredientList.put(Items.IRON_HELMET, getIronIngredientList(new ItemStack[] { new ItemStack(Items.DIAMOND_HELMET), new ItemStack(Items.GOLDEN_HELMET) }));
         ingredientList.put(Items.IRON_CHESTPLATE, getIronIngredientList(new ItemStack[] { new ItemStack(Items.DIAMOND_CHESTPLATE), new ItemStack(Items.GOLDEN_CHESTPLATE) }));
@@ -135,8 +135,11 @@ public class ItemStackUtils {
     }
 
     public static NonNullList<Ingredient> getUpgradeMaterials (ItemStack item, World world) {
-        NonNullList<Ingredient> items = world.getRecipeManager().getRecipe(item.getItem().getRegistryName()).get().getIngredients();
-        return items;
+        if (world.getRecipeManager().getRecipe(item.getItem().getRegistryName()).isPresent()) {
+            NonNullList<Ingredient> items = world.getRecipeManager().getRecipe(item.getItem().getRegistryName()).get().getIngredients();
+            return items;
+        }
+        return null;
     }
 
 }
