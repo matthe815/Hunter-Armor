@@ -82,6 +82,7 @@ public class ItemStackUtils {
 
     public static Upgrade getUpgradeForLevel (Item item, int level) {
         if (!ingredientList.containsKey(item)) return null;
+        if (level >= ingredientList.get(item).ingredientsForUpgrade.length) return null;
         return ingredientList.get(item).ingredientsForUpgrade[level];
     }
 
