@@ -33,37 +33,4 @@ public class BlockArmorSphere extends Block {
             this.setRegistryName(new ResourceLocation(HunterArmorUpgrades.MOD_ID, "armor_sphere_ore"));
         }
     }
-
-    /**
-     * Uses an inner class as an INamedContainerProvider.  This does two things:
-     *   1) Provides a name used when displaying the container, and
-     *   2) Creates an instance of container on the server which is linked to the ItemFlowerBag
-     * You could use SimpleNamedContainerProvider with a lambda instead, but I find this method easier to understand
-     * I've used a static inner class instead of a non-static inner class for the same reason
-     */
-    private static class ContainerProviderArmorCrafter implements INamedContainerProvider {
-        public ContainerProviderArmorCrafter() {}
-
-        @Override
-        public ITextComponent getDisplayName() {
-            return new TranslationTextComponent("title.hunterarmorupgrades.armorcrafter");
-        }
-
-        /**
-         * The name is misleading; createMenu has nothing to do with creating a Screen, it is used to create the Container on the server only
-         */
-        @Override
-        public ContainerArmorCrafter createMenu(int windowID, PlayerInventory playerInventory, PlayerEntity playerEntity) {
-            return new ContainerArmorCrafter(windowID, playerInventory);
-        }
-    }
-
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        INamedContainerProvider provider = new ContainerProviderArmorCrafter();
-
-        if (!worldIn.isRemote) NetworkHooks.openGui((ServerPlayerEntity) player, provider);
-
-        return ActionResultType.SUCCESS;
-    }
 }
