@@ -6,6 +6,7 @@ import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
@@ -39,7 +40,7 @@ public class PacketArmorUpgrade {
          */
         public static void handleServer(final PacketArmorUpgrade pkt, Supplier<NetworkEvent.Context> ctx) {
             ContainerArmorCrafter container = ((ContainerArmorCrafter) Objects.requireNonNull(ctx.get().getSender()).openContainer);
-            PlayerEntity player = Objects.requireNonNull(ctx.get().getSender());
+            ServerPlayerEntity player = Objects.requireNonNull(ctx.get().getSender());
             ItemStack item = container.getSlotItem();
             ItemStack newItem = new ItemStack(container.getSlotItem().getItem());
 
@@ -74,12 +75,12 @@ public class PacketArmorUpgrade {
             container.crafterInventory.setInventorySlotContents(0, newItem);
         }
 
-        private static void takeUpgradeItems(PlayerEntity player, ContainerArmorCrafter container, int level) {
+        private static void takeUpgradeItems(ServerPlayerEntity player, ContainerArmorCrafter container, int level) {
             List<ItemStack> ingredients = ItemStackUtils.getIngredientList(container.getSlotItem(), player.world, level);
 
             for (ItemStack ingredient: ingredients) {
                 // Show as able if you have enough items
-                ItemStack item = ItemStackUtils.getHeldItemStack(player, ingredient);
+                ItemStack item = ItemStackUtils.getHeldItemStackServer(player, ingredient);
                 item.setCount(item.getCount() - ingredient.getCount());
             }
 

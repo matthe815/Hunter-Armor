@@ -4,6 +4,7 @@ import dev.matthe815.hunterarmorupgrades.Registration;
 import dev.matthe815.hunterarmorupgrades.upgrades.Upgrade;
 import dev.matthe815.hunterarmorupgrades.upgrades.UpgradeRoute;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -87,6 +88,18 @@ public class ItemStackUtils {
     public static ItemStack getHeldItemStack (PlayerEntity player, ItemStack itemStack)
     {
         return player.inventory.getStackInSlot(player.inventory.getSlotFor(itemStack));
+    }
+
+    public static ItemStack getHeldItemStackServer (ServerPlayerEntity player, ItemStack stack)
+    {
+        ItemStack heldStack = null;
+        for (ItemStack stackd : player.inventory.mainInventory) {
+            if (stack.getItem().equals(stackd.getItem())) {
+                heldStack = stackd;
+                break;
+            }
+        }
+        return heldStack;
     }
 
     public static List<ItemStack> getIngredientList (ItemStack item, World world, int level)

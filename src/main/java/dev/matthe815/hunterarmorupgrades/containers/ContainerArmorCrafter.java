@@ -39,7 +39,7 @@ public class ContainerArmorCrafter extends Container {
 
     public boolean hasIngredient(ItemStack ingredient)
     {
-        return this.inventory.hasItemStack(ingredient) && this.inventory.getStackInSlot(this.inventory.getSlotFor(ingredient)).getCount() >= ingredient.getCount();
+        return true;
     }
 
     protected void addPlayerInventory(int xInventory, int yInventory) {
@@ -62,6 +62,15 @@ public class ContainerArmorCrafter extends Container {
 
             id++;
         }
+    }
+
+    @Override
+    public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+        Slot sourceSlot = inventorySlots.get(index);
+        ItemStack sourceStack = sourceSlot.getStack();
+        ItemStack copyOfSourceStack = sourceStack.copy();
+
+        return copyOfSourceStack;
     }
 
     @Override
