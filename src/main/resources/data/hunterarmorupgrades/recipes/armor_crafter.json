@@ -3,26 +3,14 @@
   "pattern":
   [
     "iii",
-    " a ",
-    "gdg"
+    " i ",
+    "iii"
   ],
   "key":
   {
     "i":
     {
       "item": "minecraft:iron_ingot"
-    },
-    "a":
-    {
-      "item": "minecraft:anvil"
-    },
-    "g":
-    {
-      "item": "minecraft:gold_ingot"
-    },
-    "d":
-    {
-      "item": "minecraft:diamond"
     }
   },
   "result":
