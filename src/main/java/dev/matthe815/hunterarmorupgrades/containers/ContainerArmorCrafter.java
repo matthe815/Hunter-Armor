@@ -65,11 +65,17 @@ public class ContainerArmorCrafter extends Container {
 
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
-        Slot sourceSlot = inventorySlots.get(index);
-        ItemStack sourceStack = sourceSlot.getStack();
-        ItemStack copyOfSourceStack = sourceStack.copy();
+        Slot slot = this.getSlot(index);
+        ItemStack item = slot.getStack().copy();
 
-        this.crafterInventory.setInventorySlotContents(0, copyOfSourceStack);
+        if (index == 0) {
+            playerIn.inventory.addItemStackToInventory(item);
+        } else {
+            crafterInventory.setInventorySlotContents(0, item);
+        }
+
+        slot.putStack(ItemStack.EMPTY);
+        slot.onSlotChanged();
 
         return ItemStack.EMPTY;
     }
