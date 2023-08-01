@@ -11,7 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.Button;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
@@ -39,7 +38,9 @@ public class ScreenArmorCrafter extends ContainerScreen<ContainerArmorCrafter> {
     public void init(@Nonnull Minecraft minecraft, int width, int height) {
         super.init(minecraft, width, height);
 
-        this.edgeSpacingX = (this.width - this.xSize) / 2;
+        this.xSize = 202;
+
+        this.edgeSpacingX = ((this.width - this.xSize)) / 2;
         this.edgeSpacingY = (this.height - this.ySize) / 2;
 
         int upgradeButtonX = edgeSpacingX + xSize - 75;

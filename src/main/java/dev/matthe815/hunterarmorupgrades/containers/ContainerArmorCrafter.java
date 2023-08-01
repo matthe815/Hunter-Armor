@@ -16,9 +16,9 @@ public class ContainerArmorCrafter extends Container {
         super(Registration.ARMOR_CRAFTER.get(), windowId);
 
         this.inventory = playerInventory;
-        this.addSlot(new Slot(this.crafterInventory, 0, 153, 8));
+        this.addSlot(new Slot(this.crafterInventory, 0, 166, 8));
 
-        addPlayerInventory(9, 84);
+        addPlayerInventory(9 - 13, 84);
     }
 
     // Check if the item in the slot is an upgradeable item.
