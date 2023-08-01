@@ -1,12 +1,14 @@
 package dev.matthe815.hunterarmorupgrades.containers;
 
 import dev.matthe815.hunterarmorupgrades.Registration;
+import dev.matthe815.hunterarmorupgrades.utils.ItemStackUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 
 public class ContainerArmorCrafter extends Container {
     public PlayerInventory inventory;
@@ -25,6 +27,13 @@ public class ContainerArmorCrafter extends Container {
     public boolean hasUpgradableItem()
     {
         return (getSlotItem().getItem() instanceof ArmorItem);
+    }
+
+    public boolean isMaxLevel()
+    {
+        CompoundNBT nbt = crafterInventory.getStackInSlot(0).getTag();
+        int level = nbt != null ? nbt.getInt("upgrade_level") : 0;
+        return level >= ItemStackUtils.ingredientList.get(crafterInventory.getStackInSlot(0).getItem()).ingredientsForUpgrade.length;
     }
 
     public ItemStack getSlotItem()

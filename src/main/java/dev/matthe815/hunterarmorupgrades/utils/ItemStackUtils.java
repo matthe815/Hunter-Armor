@@ -29,7 +29,6 @@ public class ItemStackUtils {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 5), new ItemStack(Registration.DIAMOND_RIVETS, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 3), new ItemStack(Registration.DIAMOND_RIVETS, 3), new ItemStack(Items.FEATHER, 4) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 2), new ItemStack(Items.EMERALD, 1)  }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 6), new ItemStack(Registration.DIAMOND_RIVETS, 4), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
         }
         );
     }

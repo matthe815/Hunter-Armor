@@ -69,12 +69,12 @@ public class ScreenArmorCrafter extends ContainerScreen<ContainerArmorCrafter> {
 
         String upgradeTranslation = new TranslationTextComponent("button.hunterarmorupgrades.upgrade").getString();
         String upgradeText = this.container.getSlotItem().getTag() != null ? String.format("%s %s/%s", upgradeTranslation, this.container.getSlotItem().getTag().getInt("upgrade_level"), 7) : null;
-        boolean isActive = this.container.hasUpgradableItem();
+        boolean isActive = this.container.hasUpgradableItem() && !this.container.isMaxLevel();
 
         this.makeProgressionButtions();
 
         // Only display the upgrade text if the slot has an upgradeable item.
-        if (this.container.hasUpgradableItem()) {
+        if (this.container.hasUpgradableItem() && !this.container.isMaxLevel()) {
             // Draw the name and material texts.
             int textColor1 = 0x000000;
 
