@@ -38,7 +38,7 @@ public class ContainerArmorCrafter extends Container {
         for (ItemStack stack : this.inventory.mainInventory) {
             if (stack.getItem().equals(ingredient.getItem())) stackd = stack;
         }
-        return stackd != null && (stackd.getCount() >= ingredient.getCount());
+        return (stackd != null && (stackd.getCount() >= ingredient.getCount()) || this.inventory.player.isCreative());
     }
 
     protected void addPlayerInventory(int xInventory, int yInventory) {

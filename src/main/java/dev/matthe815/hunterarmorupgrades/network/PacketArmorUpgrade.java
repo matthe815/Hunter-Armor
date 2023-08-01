@@ -75,6 +75,8 @@ public class PacketArmorUpgrade {
         }
 
         private static void takeUpgradeItems(ServerPlayerEntity player, ContainerArmorCrafter container, int level) {
+            if (player.isCreative()) return; // Creative players upgrade for free.
+
             List<ItemStack> ingredients = ItemStackUtils.getIngredientList(container.getSlotItem(), player.world, level);
 
             for (ItemStack ingredient: ingredients) {
@@ -86,6 +88,8 @@ public class PacketArmorUpgrade {
         }
 
         private static boolean checkUpgradeRequirements(PlayerEntity player, ContainerArmorCrafter container, int level) {
+            if (player.isCreative()) return true; // Creative players upgrade for free.
+
             List<ItemStack> ingredients = ItemStackUtils.getIngredientList(container.getSlotItem(), player.world, level);
 
             boolean valid = true;
