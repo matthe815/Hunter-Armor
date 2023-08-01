@@ -1,6 +1,6 @@
 {
-  "parent": "hunterarmorupgrades:armor_sphere_ore",
+  "parent": "hunterarmorupgrades:armor_crafter",
   "textures": {
-    "layer0": "hunterarmorupgrades:blocks/armor_sphere_ore"
+    "layer0": "hunterarmorupgrades:items/armor_crafter"
   }
 }
