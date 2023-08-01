@@ -37,13 +37,13 @@ public class ItemStackUtils {
     private static UpgradeRoute getIronIngredientList (ItemStack[] finalResult) {
         return new UpgradeRoute(new Upgrade[] {
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 2) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 1), new ItemStack(Items.GUNPOWDER, 2) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.IRON_INGOT, 2), new ItemStack(Registration.IRON_PLATE, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Items.NETHER_STAR, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 5), new ItemStack(Registration.IRON_RIVETS, 3) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Registration.IRON_RIVETS, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 3), new ItemStack(Registration.IRON_RIVETS, 3), new ItemStack(Items.FEATHER, 4) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Items.EMERALD, 1)  }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 6), new ItemStack(Registration.IRON_RIVETS, 4), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
+                new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Items.PUMPKIN, 3), new ItemStack(Items.CLAY, 2)  }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 3), new ItemStack(Registration.IRON_RIVETS, 2), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
             }
         );
     }
