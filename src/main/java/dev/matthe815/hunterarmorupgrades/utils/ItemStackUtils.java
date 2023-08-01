@@ -62,6 +62,20 @@ public class ItemStackUtils {
         );
     }
 
+    private static UpgradeRoute getDefaultRoute () {
+        return new UpgradeRoute(new Upgrade[] {
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE, 1) }, null),
+        }
+        );
+    }
+
     public static void init()
     {
         ingredientList.put(Items.DIAMOND_HELMET, getDiamondIngredientList(null));
@@ -103,7 +117,7 @@ public class ItemStackUtils {
         if (ingredientList.containsKey(item.getItem()))
             return ingredientList.get(item.getItem()).getIngredientsForLevel(level);
 
-        return mergeIngredients(getUpgradeMaterials(item, world));
+        return getDefaultRoute().getIngredientsForLevel(0);
     }
 
     public static List<ItemStack> mergeIngredients (NonNullList<Ingredient> ingredients) {

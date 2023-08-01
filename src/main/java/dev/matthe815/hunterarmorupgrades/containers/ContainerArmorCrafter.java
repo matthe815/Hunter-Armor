@@ -70,7 +70,7 @@ public class ContainerArmorCrafter extends Container {
 
         if (index == 0) {
             if (!mergeItemStack(item, 1, 35, false)) {
-                return item;
+                return ItemStack.EMPTY;
             }
             //playerIn.inventory.addItemStackToInventory(item);
         } else {
@@ -89,9 +89,7 @@ public class ContainerArmorCrafter extends Container {
     @Override
     public void onContainerClosed(PlayerEntity playerIn) {
         // Return the item to you if the inventory is closed
-        if (!(this.crafterInventory.getStackInSlot(0).getItem() instanceof ArmorItem)) return;
         playerIn.inventory.addItemStackToInventory(this.crafterInventory.getStackInSlot(0));
-
         super.onContainerClosed(playerIn);
     }
 
