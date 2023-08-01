@@ -138,6 +138,7 @@ public class ScreenArmorCrafter extends ContainerScreen<ContainerArmorCrafter> {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(@Nonnull MatrixStack matrixStack, float partialTicks, int x, int y) {
+
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         assert this.minecraft != null;
         this.minecraft.getTextureManager().bindTexture(TEXTURE);

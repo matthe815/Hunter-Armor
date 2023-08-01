@@ -69,8 +69,14 @@ public class ContainerArmorCrafter extends Container {
         ItemStack item = slot.getStack().copy();
 
         if (index == 0) {
-            playerIn.inventory.addItemStackToInventory(item);
+            if (!mergeItemStack(item, 1, 35, false)) {
+                return item;
+            }
+            //playerIn.inventory.addItemStackToInventory(item);
         } else {
+            if (crafterInventory.getStackInSlot(0) != ItemStack.EMPTY) {
+                return ItemStack.EMPTY;
+            }
             crafterInventory.setInventorySlotContents(0, item);
         }
 
