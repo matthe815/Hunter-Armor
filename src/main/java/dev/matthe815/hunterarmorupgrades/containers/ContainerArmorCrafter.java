@@ -7,10 +7,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.*;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TextComponent;
 
 public class ContainerArmorCrafter extends Container {
     public PlayerInventory inventory;
@@ -20,7 +16,6 @@ public class ContainerArmorCrafter extends Container {
         super(Registration.ARMOR_CRAFTER.get(), windowId);
 
         this.inventory = playerInventory;
-
         this.addSlot(new Slot(this.crafterInventory, 0, 153, 8));
 
         addPlayerInventory(9, 84);
@@ -74,7 +69,9 @@ public class ContainerArmorCrafter extends Container {
         ItemStack sourceStack = sourceSlot.getStack();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
-        return copyOfSourceStack;
+        this.crafterInventory.setInventorySlotContents(0, copyOfSourceStack);
+
+        return ItemStack.EMPTY;
     }
 
     @Override

@@ -12,6 +12,7 @@ public class UpgradeRoute {
     }
 
     public List<ItemStack> getIngredientsForLevel (int level) {
+        if (level >= ingredientsForUpgrade.length) return null;
         return ingredientsForUpgrade[level].asList();
     }
 

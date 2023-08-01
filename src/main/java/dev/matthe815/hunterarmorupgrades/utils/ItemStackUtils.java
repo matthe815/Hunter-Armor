@@ -42,7 +42,7 @@ public class ItemStackUtils {
                 new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Registration.IRON_RIVETS, 3) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 3), new ItemStack(Registration.IRON_RIVETS, 3), new ItemStack(Items.FEATHER, 4) }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Items.DIAMOND, 1) }, null),
-                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Items.PUMPKIN, 3), new ItemStack(Items.CLAY, 2)  }, null),
+                new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 2), new ItemStack(Items.PUMPKIN, 2), new ItemStack(Items.CLAY, 2)  }, null),
                 new Upgrade(new ItemStack[] { new ItemStack(Registration.IRON_PLATE, 3), new ItemStack(Registration.IRON_RIVETS, 2), new ItemStack(Registration.ARMOR_SPHERE2) }, finalResult)
             }
         );

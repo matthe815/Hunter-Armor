@@ -24,8 +24,10 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class BlockArmorSphere extends Block {
     public BlockArmorSphere() {
@@ -35,7 +37,17 @@ public class BlockArmorSphere extends Block {
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-        return Arrays.asList(new ItemStack[] { new ItemStack(Registration.ARMOR_SPHERE) });
+        int random = new Random().nextInt(10);
+        List<ItemStack> generatedLoot = new ArrayList<>();
+
+        // Give about a 25% chance to generate an armor sphere and a 5% chance for a +.
+        if (random > 2) {
+            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE, new Random().nextInt( 1) + 1));
+        }
+        if (random < 3) {
+            generatedLoot.add(new ItemStack(Registration.ARMOR_SPHERE2, 1));
+        }
+        return generatedLoot;
     }
 
     public static class ItemBlockArmorCrafter extends BlockItem {
